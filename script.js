@@ -1,0 +1,51 @@
+const preview=document.querySelector('.cursor-preview');
+if(preview){
+ const fine=matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)');
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const image=preview.querySelector('img');let x=0,y=0,tx=0,ty=0,raf=0,active=false;
+ const hide=()=>{active=false;preview.classList.remove('visible');cancelAnimationFrame(raf);raf=0};
+ function draw(){x+=(tx-x)*(reduced.matches?1:.22);y+=(ty-y)*(reduced.matches?1:.22);preview.style.transform=`translate3d(${x}px,${y}px,0)`;if(active)raf=requestAnimationFrame(draw)}
+ function position(e){tx=Math.max(12,Math.min(e.clientX+28,innerWidth-372));ty=Math.max(12,Math.min(e.clientY+24,innerHeight-252))}
+ document.querySelectorAll('.project-row[data-cover]').forEach(row=>{
+ row.addEventListener('pointerenter',e=>{if(!fine.matches||e.pointerType==='touch')return;image.src=row.dataset.cover;position(e);x=tx;y=ty;active=true;preview.classList.add('visible');cancelAnimationFrame(raf);draw()});
+ row.addEventListener('pointermove',position);row.addEventListener('pointerleave',hide);row.addEventListener('click',hide);
+ });
+ addEventListener('scroll',hide,{passive:true});addEventListener('resize',hide);addEventListener('blur',hide);fine.addEventListener('change',hide);
+}
+
+// Page transitions between internal pages.
+(()=>{
+ const root=document.documentElement;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const label=a=>{const u=new URL(a.href,location.href).pathname;
+  if(/\/work\//.test(u))return 'Work';
+  if(/\/about\//.test(u))return 'About';
+  if(/\/projects\//.test(u)){const n=a.querySelector('.project-name,em');return n?n.textContent.trim():'Progetto'}
+  return 'Stefano Vergani'};
+ document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href]');
+  if(!a||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  if(a.target==='_blank'||a.hasAttribute('download'))return;
+  const url=new URL(a.href,location.href);
+  if(url.origin!==location.origin||!/^https?:|^file:/.test(url.protocol))return;
+  if(url.pathname===location.pathname&&url.hash)return;
+  if(reduced.matches)return;
+  e.preventDefault();
+  const t=label(a);
+  try{sessionStorage.setItem('pt',t)}catch(_){}
+  root.classList.remove('pt-enter');root.setAttribute('data-pt',t);root.classList.add('pt-leave');
+  setTimeout(()=>{location.href=url.href},520);
+ });
+ addEventListener('pageshow',e=>{if(e.persisted){root.classList.remove('pt-leave','pt-enter')}});
+ root.addEventListener('animationend',()=>{},{passive:true});
+})();
+
+// About: CV folder tabs.
+(()=>{
+ const tabs=[...document.querySelectorAll('.cv-tab')];if(!tabs.length)return;
+ const folder=document.querySelector('.cv-folder');
+ const select=t=>{tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on});
+  if(folder){folder.style.borderTopLeftRadius=t===tabs[0]?'0':'';folder.parentElement.dataset.active=t.id==='tab-edu'?'edu':'exp'}};
+ tabs.forEach((t,i)=>{t.addEventListener('click',()=>select(t));
+  t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];select(n);n.focus()}})});
+})();
