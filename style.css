@@ -351,7 +351,7 @@ footer.site-footer .wordmark{white-space:nowrap;font-size:14.7vw}@media(max-widt
 .cs-row{display:grid;gap:16px;margin-top:16px}
 .cs-row:first-child{margin-top:0}
 .cs-split{grid-template-columns:7fr 5fr}
-.cs-pair{grid-template-columns:1fr 1fr}
+.cs-pair{grid-template-columns:var(--cols,1fr 1fr)}
 .cs-cell{position:relative;overflow:hidden;aspect-ratio:var(--ar);background:#E9E7E1;border-radius:5px}
 .cs-split>.cs-cell:last-child{aspect-ratio:auto}
 .cs-cell img,.cs-cell video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
