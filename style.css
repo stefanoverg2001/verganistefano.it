@@ -383,10 +383,10 @@ footer.site-footer .wordmark{white-space:nowrap;font-size:14.7vw}@media(max-widt
 @media(max-width:768px){.cs-split48,.cs-split93{grid-template-columns:1fr}.cs-split48>.cs-cell:first-child,.cs-split93>.cs-cell:last-child{aspect-ratio:var(--ar)}}
 
 /* Case grid: mosaic + stack57 */
-.cs-mosaic,.cs-stack57{grid-template-columns:5fr 7fr}
+.cs-mosaic,.cs-stack57{grid-template-columns:var(--cols,5fr 7fr)}
 .cs-mosaic>.cs-cell:first-child,.cs-stack57>.cs-cell:first-child{aspect-ratio:auto}
 .cs-col{display:grid;gap:16px;align-content:start}
-.cs-duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cs-duo{display:grid;grid-template-columns:var(--cols,1fr 1fr);gap:16px}
 @media(max-width:768px){
  .cs-mosaic,.cs-stack57{grid-template-columns:1fr}
  .cs-mosaic>.cs-cell:first-child,.cs-stack57>.cs-cell:first-child{aspect-ratio:var(--ar)}
