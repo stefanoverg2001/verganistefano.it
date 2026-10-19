@@ -49,3 +49,6 @@ if(preview){
  tabs.forEach((t,i)=>{t.addEventListener('click',()=>select(t));
   t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];select(n);n.focus()}})});
 })();
+
+/* Video dei casi studio: si caricano e partono solo quando arrivano vicino allo schermo */
+(function(){var v=document.querySelectorAll("video[data-src]");if(!v.length)return;function go(el){if(!el.src){el.src=el.dataset.src}var p=el.play();if(p&&p.catch)p.catch(function(){})}if(!("IntersectionObserver" in window)){v.forEach(go);return}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)go(e.target);else if(e.target.src)e.target.pause()})},{rootMargin:"300px 0px"});v.forEach(function(el){io.observe(el)})})();
