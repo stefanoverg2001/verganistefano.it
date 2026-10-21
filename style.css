@@ -412,7 +412,13 @@ body:has(.archive) footer.site-footer{padding-top:clamp(24px,3vw,48px)}
 .cursor-preview.is-portrait{width:270px}
 .cursor-preview.is-portrait img{aspect-ratio:3/4}
 
-/* About: blocco contatti (21/10) — stile chiaro come prima */
-.contact .email{display:inline-block;color:#040402;text-decoration:none}
-.contact .email:hover{text-decoration:underline;text-underline-offset:.12em}
-@media(max-width:768px){.contact .email{font-size:clamp(24px,7.4vw,40px);white-space:nowrap}}
+/* About: blocco contatti (21/10) — chiaro, più grafico */
+.contact{padding-top:28px;padding-bottom:clamp(56px,7vw,110px)}
+.contact h2{font-size:clamp(14px,1.2vw,17px);margin:0 0 clamp(20px,3vw,44px)}
+.contact .contact-big{display:inline-block;color:#040402;text-decoration:none;font-size:clamp(44px,8.4vw,136px);font-weight:400;letter-spacing:-.06em;line-height:.95;white-space:nowrap}
+.contact .nowrap{white-space:nowrap}
+.contact .contact-arrow{display:inline-block;vertical-align:top;font-size:.62em;line-height:1;margin:.12em 0 0 .16em;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.contact .contact-big:hover .contact-arrow,.contact .contact-big:focus-visible .contact-arrow{transform:translate(.12em,-.12em)}
+.contact .contact-big:hover{text-decoration:underline;text-decoration-thickness:max(2px,.035em);text-underline-offset:.1em}
+.contact p{font-size:clamp(13px,1.15vw,16px);color:#6b6a66;margin-top:clamp(20px,2.6vw,36px);max-width:46ch}
+@media(max-width:768px){.contact .contact-big{white-space:normal;font-size:14.5vw;line-height:.98}}
