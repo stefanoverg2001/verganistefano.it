@@ -52,3 +52,6 @@ if(preview){
 
 /* Video dei casi studio: si caricano e partono solo quando arrivano vicino allo schermo */
 (function(){var v=document.querySelectorAll("video[data-src]");if(!v.length)return;function go(el){if(!el.src){el.src=el.dataset.src}var p=el.play();if(p&&p.catch)p.catch(function(){})}if(!("IntersectionObserver" in window)){v.forEach(go);return}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)go(e.target);else if(e.target.src)e.target.pause()})},{rootMargin:"300px 0px"});v.forEach(function(el){io.observe(el)})})();
+
+/* Copertine Work: le scarico in anticipo appena la pagina è pronta, così al passaggio del mouse compaiono subito */
+(function(){var r=document.querySelectorAll('.project-row[data-cover]');if(!r.length)return;function go(){r.forEach(function(e){var i=new Image();i.decoding='async';i.src=e.dataset.cover})}if(document.readyState==='complete')setTimeout(go,200);else addEventListener('load',function(){setTimeout(go,200)})})();
