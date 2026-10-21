@@ -393,3 +393,16 @@ footer.site-footer .wordmark{white-space:nowrap;font-size:14.7vw}@media(max-widt
  .cs-col,.cs-duo{gap:8px}
 }
 @media(min-width:769px){.metadata{grid-template-columns:31% minmax(120px,14%) minmax(0,1fr) minmax(0,1fr)}}
+
+/* === Modifiche 21/10 === */
+/* Work: meno spazio tra archivio e footer, footer agganciato al fondo dello schermo */
+body:has(.archive) .archive{min-height:0;padding-bottom:0}
+body:has(.archive) footer.site-footer{padding-top:clamp(24px,3vw,48px)}
+@media(max-width:768px){body:has(.archive) footer.site-footer{padding-top:32px}}
+/* About: cartelle Experience/Education un po' più in alto */
+.about .cv{margin-top:-28px}
+@media(max-width:768px){.about .cv{margin-top:-20px}}
+/* Home smartphone: visual leggermente più grande (stesso centro) */
+@media(max-width:768px){.landing-stage .landing-scene{--h:calc(var(--wm)*.33);left:35.07%;top:5.8%}}
+/* Smartphone: link del footer distribuiti con spazi uguali */
+@media(max-width:768px){.landing-links,footer.site-footer .footer-links-row{display:flex;justify-content:space-between;gap:0}}
