@@ -422,3 +422,7 @@ body:has(.archive) footer.site-footer{padding-top:clamp(24px,3vw,48px)}
 .contact .contact-big:hover{text-decoration:underline;text-decoration-thickness:max(2px,.035em);text-underline-offset:.1em}
 .contact p{font-size:clamp(13px,1.15vw,16px);color:#6b6a66;margin-top:clamp(20px,2.6vw,36px);max-width:46ch}
 @media(max-width:768px){.contact .contact-big{white-space:normal;font-size:14.5vw;line-height:.98}}
+.contact h2{font-size:clamp(20px,2.1vw,32px);letter-spacing:-.02em;line-height:1.2}
+.contact p{max-width:none}
+@media(min-width:769px){.contact p{white-space:nowrap}}
+@media(max-width:768px){.contact h2{font-size:20px}}
