@@ -5,9 +5,9 @@ if(preview){
  const image=preview.querySelector('img');let x=0,y=0,tx=0,ty=0,raf=0,active=false;
  const hide=()=>{active=false;preview.classList.remove('visible');cancelAnimationFrame(raf);raf=0};
  function draw(){x+=(tx-x)*(reduced.matches?1:.22);y+=(ty-y)*(reduced.matches?1:.22);preview.style.transform=`translate3d(${x}px,${y}px,0)`;if(active)raf=requestAnimationFrame(draw)}
- function position(e){tx=Math.max(12,Math.min(e.clientX+28,innerWidth-372));ty=Math.max(12,Math.min(e.clientY+24,innerHeight-252))}
+ function position(e){const pw=preview.offsetWidth||360,ph=preview.offsetHeight||270;tx=Math.max(12,Math.min(e.clientX+28,innerWidth-pw-12));ty=Math.max(12,Math.min(e.clientY+24,innerHeight-ph-12))}
  document.querySelectorAll('.project-row[data-cover]').forEach(row=>{
- row.addEventListener('pointerenter',e=>{if(!fine.matches||e.pointerType==='touch')return;image.src=row.dataset.cover;position(e);x=tx;y=ty;active=true;preview.classList.add('visible');cancelAnimationFrame(raf);draw()});
+ row.addEventListener('pointerenter',e=>{if(!fine.matches||e.pointerType==='touch')return;preview.classList.toggle('is-portrait',row.dataset.orient==='v');image.src=row.dataset.cover;position(e);x=tx;y=ty;active=true;preview.classList.add('visible');cancelAnimationFrame(raf);draw()});
  row.addEventListener('pointermove',position);row.addEventListener('pointerleave',hide);row.addEventListener('click',hide);
  });
  addEventListener('scroll',hide,{passive:true});addEventListener('resize',hide);addEventListener('blur',hide);fine.addEventListener('change',hide);
