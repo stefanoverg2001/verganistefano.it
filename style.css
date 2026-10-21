@@ -407,10 +407,9 @@ body:has(.archive) footer.site-footer{padding-top:clamp(24px,3vw,48px)}
 /* Smartphone: link del footer distribuiti con spazi uguali */
 @media(max-width:768px){.landing-links,footer.site-footer .footer-links-row{display:flex;justify-content:space-between;gap:0}}
 
-/* Copertine in hover: orizzontali 4:3 larghe 360px, verticali 3:4 larghe 270px (stessa area visiva) */
-.cursor-preview img{aspect-ratio:4/3;object-fit:cover}
-.cursor-preview.is-portrait{width:270px}
-.cursor-preview.is-portrait img{aspect-ratio:3/4}
+/* Copertine in hover: ogni immagine nel suo formato, stessa area visiva, angoli arrotondati */
+.cursor-preview{border-radius:6px;overflow:hidden}
+.cursor-preview img{border-radius:6px}
 
 /* About: blocco contatti (21/10) — chiaro, più grafico */
 .contact{padding-top:28px;padding-bottom:clamp(56px,7vw,110px)}
