@@ -22,15 +22,9 @@ if(preview){
   const s=document.createElement('span'),m=document.createElement('em'),w=document.createElement('b');w.textContent=t;m.appendChild(w);s.appendChild(m);d.appendChild(s);return d};
  if(root.classList.contains('pt-enter')){const o=pix(root.getAttribute('data-pt')||'','out');document.body.appendChild(o);root.classList.add('pt-ready');setTimeout(()=>o.remove(),1200)}
  if(root.classList.contains('intro')){
-  const d=pix('Stefano Vergani','intro');const n=document.createElement('small');n.className='pt-count';n.textContent='0';d.appendChild(n);document.body.appendChild(d);root.classList.add('pt-ready');
   try{sessionStorage.setItem('intro','1')}catch(_){}
-  const t0=performance.now(),MIN=1500;let loaded=document.readyState==='complete',shown=0,done=false;
-  addEventListener('load',()=>{loaded=true});
-  const tick=now=>{const el=now-t0,goal=loaded?Math.min(1,el/MIN):Math.min(.9,el/MIN*.9);shown+=(goal-shown)*.12;if(goal>=1&&shown>.995)shown=1;n.textContent=Math.round(shown*100);
-   if(shown<1&&el<6000)return requestAnimationFrame(tick);
-   if(done)return;done=true;n.textContent='100';
-   setTimeout(()=>{d.classList.add('out');root.classList.add('intro-play');setTimeout(()=>{d.remove();root.classList.remove('intro','intro-play')},2600)},150)};
-  requestAnimationFrame(tick)}
+  let go=false;const play=()=>{if(go)return;go=true;requestAnimationFrame(()=>{root.classList.add('intro-play');setTimeout(()=>root.classList.remove('intro','intro-play'),2600)})};
+  if(document.readyState==='complete')play();else{addEventListener('load',play);setTimeout(play,1500)}}
  const label=a=>{const u=new URL(a.href,location.href).pathname;
   if(/\/work\//.test(u))return 'Work';
   if(/\/about\//.test(u))return 'About';
