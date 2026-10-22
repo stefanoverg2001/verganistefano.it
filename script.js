@@ -19,7 +19,7 @@ if(preview){
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const pix=(t,mode)=>{const d=document.createElement('div');d.className='pt-bars '+mode;d.setAttribute('aria-hidden','true');
   const c=document.createElement('i');d.appendChild(c);
-  const s=document.createElement('span'),m=document.createElement('em'),w=document.createElement('b');w.textContent=t;m.appendChild(w);s.appendChild(m);d.appendChild(s);return d};
+  const q=document.createElement('div');q.className='mq';const txt=(t+'\u2002\u2014\u2002').repeat(8);for(let r=0;r<3;r++){const row=document.createElement('div');row.textContent=txt;q.appendChild(row)}d.appendChild(q);return d};
  if(root.classList.contains('pt-enter')){const o=pix(root.getAttribute('data-pt')||'','out');document.body.appendChild(o);root.classList.add('pt-ready');setTimeout(()=>o.remove(),1200)}
  const label=a=>{const u=new URL(a.href,location.href).pathname;
   if(/\/work\//.test(u))return 'Work';
@@ -33,7 +33,7 @@ if(preview){
   const url=new URL(a.href,location.href);
   if(url.origin!==location.origin||!/^https?:|^file:/.test(url.protocol))return;
   if(url.pathname===location.pathname&&url.hash)return;
-  if(reduced.matches||'onpagereveal' in window)return;
+  if(reduced.matches)return;
   e.preventDefault();
   const t=label(a);
   try{sessionStorage.setItem('pt',t)}catch(_){}
