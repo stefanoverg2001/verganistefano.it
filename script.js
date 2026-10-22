@@ -18,17 +18,8 @@ if(preview){
  const root=document.documentElement;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const pix=(t,mode)=>{const d=document.createElement('div');d.className='pt-bars '+mode;d.setAttribute('aria-hidden','true');
-  const c=document.createElement('canvas'),W=innerWidth,H=innerHeight,dpr=Math.min(2,devicePixelRatio||1);c.width=W*dpr;c.height=H*dpr;d.appendChild(c);
-  const s=document.createElement('span'),m=document.createElement('em'),w=document.createElement('b');w.textContent=t;m.appendChild(w);s.appendChild(m);d.appendChild(s);
-  const g=c.getContext('2d');g.scale(dpr,dpr);g.fillStyle='#040402';
-  const sz=Math.ceil(Math.max(W,H)/(W<769?12:20)),cols=Math.ceil(W/sz),rows=Math.ceil(H/sz),cells=[];
-  for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const k=x/cols*.5+y/rows*.5;cells.push({x,y,d:k*.55+Math.random()*.45})}
-  const dur=mode==='in'?480:620,delay=mode==='in'?0:120,t0=performance.now();
-  if(mode==='out'){g.fillRect(0,0,W,H)}
-  const step=now=>{const p=Math.min(1,Math.max(0,(now-t0-delay)/dur));g.clearRect(0,0,W,H);
-   for(const q of cells){const on=mode==='in'?q.d<=p:q.d>p;if(on)g.fillRect(q.x*sz,q.y*sz,sz+.5,sz+.5)}
-   if(p<1)requestAnimationFrame(step);else if(mode==='out')d.remove()};
-  requestAnimationFrame(step);return d};
+  const c=document.createElement('i');d.appendChild(c);
+  const s=document.createElement('span'),m=document.createElement('em'),w=document.createElement('b');w.textContent=t;m.appendChild(w);s.appendChild(m);d.appendChild(s);return d};
  if(root.classList.contains('pt-enter')){const o=pix(root.getAttribute('data-pt')||'','out');document.body.appendChild(o);root.classList.add('pt-ready');setTimeout(()=>o.remove(),1200)}
  const label=a=>{const u=new URL(a.href,location.href).pathname;
   if(/\/work\//.test(u))return 'Work';
