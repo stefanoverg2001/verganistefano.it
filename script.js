@@ -22,7 +22,6 @@ if(preview){
   const s=document.createElement('span'),m=document.createElement('em'),w=document.createElement('b');w.textContent=t;m.appendChild(w);s.appendChild(m);d.appendChild(s);return d};
  if(root.classList.contains('pt-enter')){const o=pix(root.getAttribute('data-pt')||'','out');document.body.appendChild(o);root.classList.add('pt-ready');setTimeout(()=>o.remove(),1200)}
  if(root.classList.contains('intro')){
-  try{sessionStorage.setItem('intro','1')}catch(_){}
   let go=false;const play=()=>{if(go)return;go=true;requestAnimationFrame(()=>{root.classList.add('intro-play');setTimeout(()=>root.classList.remove('intro','intro-play'),2600)})};
   if(document.readyState==='complete')play();else{addEventListener('load',play);setTimeout(play,1500)}}
  const label=a=>{const u=new URL(a.href,location.href).pathname;
