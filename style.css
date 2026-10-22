@@ -452,3 +452,6 @@ body:has(.archive) footer.site-footer{padding-top:clamp(24px,3vw,48px)}
  header nav a{padding-block:10px;margin-block:-10px}
 }
 @media(max-width:768px){header .logo{padding-block:10px;margin-block:-10px}}
+/* Transizione: nomi lunghi (es. NABA Communication Awards) vanno a capo restando centrati */
+.pt-bars span em{max-width:min(92vw,14ch);text-align:center;line-height:.95}
+.pt-bars span b{text-wrap:balance}
