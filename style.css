@@ -207,18 +207,13 @@ footer{min-height:0}.wordmark{margin-top:0;padding-top:clamp(64px,9vw,150px)}@me
 html.pt-enter::before{content:"";position:fixed;inset:0;z-index:999;background:#040402;pointer-events:all}
 html.pt-enter::after{content:attr(data-pt);position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;color:#FAF9F6;font-family:Inter,Arial,sans-serif;font-weight:500;font-size:clamp(48px,11vw,180px);letter-spacing:-.06em;pointer-events:none}
 html.pt-enter.pt-ready::before,html.pt-enter.pt-ready::after{display:none}
-.pt-bars{position:fixed;inset:0;z-index:1000;display:grid;grid-template-columns:repeat(5,1fr);pointer-events:all}
-.pt-bars i{background:#040402;margin-right:-1px}
+.pt-bars{position:fixed;inset:0;z-index:1000;pointer-events:all}.pt-bars canvas{position:absolute;inset:0;width:100%;height:100%}
 .pt-bars span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#FAF9F6;font-family:Inter,Arial,sans-serif;font-weight:500;font-size:clamp(48px,11vw,180px);letter-spacing:-.06em}
 .pt-bars span em{display:block;overflow:hidden;font-style:normal;padding:.04em .02em .14em;line-height:1}.pt-bars span b{font-weight:inherit;display:block}
-.pt-bars.in i{transform:translateY(-101%);animation:pt-bar-in .45s cubic-bezier(.7,0,.3,1) calc(var(--i)*35ms) forwards}
 .pt-bars.in span b{transform:translateY(110%);animation:pt-word-up .5s cubic-bezier(.2,.8,.2,1) .3s forwards}
-.pt-bars.out i{animation:pt-bar-out .55s cubic-bezier(.7,0,.3,1) calc(var(--i)*35ms + .12s) forwards}
-.pt-bars.out span b{animation:pt-word-away .4s cubic-bezier(.7,0,.3,1) forwards}
+.pt-bars.out span b{animation:pt-word-away .35s cubic-bezier(.7,0,.3,1) forwards}
 html.pt-enter main{animation:pt-content .8s cubic-bezier(.2,.8,.2,1) .35s both}
 html.pt-enter header{animation:pt-fade .6s ease .45s both}
-@keyframes pt-bar-in{to{transform:translateY(0)}}
-@keyframes pt-bar-out{to{transform:translateY(101%)}}
 @keyframes pt-word-up{to{transform:translateY(0)}}
 @keyframes pt-word-away{to{transform:translateY(-110%)}}
 @keyframes pt-content{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
