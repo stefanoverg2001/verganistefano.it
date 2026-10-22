@@ -205,7 +205,7 @@ footer{min-height:0}.wordmark{margin-top:0;padding-top:clamp(64px,9vw,150px)}@me
 
 /* Page transitions: curtain with destination name */
 html.pt-enter::before{content:"";position:fixed;inset:0;z-index:999;background:#040402;pointer-events:all}
-html.pt-enter::after{content:none;position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;color:#FAF9F6;font-family:Inter,Arial,sans-serif;font-weight:500;font-size:clamp(48px,11vw,180px);letter-spacing:-.06em;pointer-events:none}
+html.pt-enter::after{content:attr(data-pt);position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;color:#FAF9F6;font-family:Inter,Arial,sans-serif;font-weight:500;font-size:clamp(48px,11vw,180px);letter-spacing:-.06em;pointer-events:none}
 html.pt-enter.pt-ready::before,html.pt-enter.pt-ready::after{display:none}
 .pt-bars{position:fixed;inset:0;z-index:1000;pointer-events:all;overflow:hidden}
 .pt-bars i{position:absolute;left:-10vw;top:-20vh;width:120vw;height:140vh;background:#040402}
@@ -452,17 +452,3 @@ body:has(.archive) footer.site-footer{padding-top:clamp(24px,3vw,48px)}
  header nav a{padding-block:10px;margin-block:-10px}
 }
 @media(max-width:768px){header .logo{padding-block:10px;margin-block:-10px}}
-/* Transizione: sipario curvo + nome in tre righe che scorrono (22/10) */
-.pt-bars .mq{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:.04em;color:#FAF9F6;font-family:Inter,Arial,sans-serif;font-weight:500;font-size:clamp(56px,12vw,200px);letter-spacing:-.06em;line-height:.95;pointer-events:none}
-.pt-bars .mq div{white-space:nowrap;will-change:transform}
-.pt-bars .mq div:nth-child(odd){color:transparent;-webkit-text-stroke:1.2px #FAF9F6}
-.pt-bars .mq div:nth-child(1){animation:mq-l 3s linear infinite}
-.pt-bars .mq div:nth-child(2){animation:mq-r 3s linear infinite}
-.pt-bars .mq div:nth-child(3){animation:mq-l 3.4s linear infinite}
-.pt-bars.in .mq{opacity:0;transform:translateY(20vh);animation:mq-in .55s cubic-bezier(.2,.8,.2,1) .2s forwards}
-.pt-bars.out .mq{animation:mq-away .5s cubic-bezier(.7,0,.3,1) forwards}
-@keyframes mq-l{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes mq-r{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-@keyframes mq-in{to{opacity:1;transform:none}}
-@keyframes mq-away{to{opacity:0;transform:translateY(-30vh)}}
-@media(max-width:768px){.pt-bars .mq div:nth-child(odd){-webkit-text-stroke-width:1px}}
