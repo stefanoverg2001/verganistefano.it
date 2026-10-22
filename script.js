@@ -33,8 +33,9 @@ if(preview){
   e.preventDefault();
   const t=label(a);
   try{sessionStorage.setItem('pt',t)}catch(_){}
+  root.style.setProperty('--px',e.clientX+'px');root.style.setProperty('--py',e.clientY+'px');
   root.classList.remove('pt-enter');root.setAttribute('data-pt',t);root.classList.add('pt-leave');
-  setTimeout(()=>{location.href=url.href},520);
+  setTimeout(()=>{location.href=url.href},640);
  });
  addEventListener('pageshow',e=>{if(e.persisted){root.classList.remove('pt-leave','pt-enter')}});
  root.addEventListener('animationend',()=>{},{passive:true});
