@@ -17,6 +17,8 @@ if(preview){
 (()=>{
  const root=document.documentElement;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const bars=(t,mode)=>{const d=document.createElement('div');d.className='pt-bars '+mode;d.setAttribute('aria-hidden','true');for(let i=0;i<5;i++){const b=document.createElement('i');b.style.setProperty('--i',i);d.appendChild(b)}const s=document.createElement('span'),m=document.createElement('em'),w=document.createElement('b');w.textContent=t;m.appendChild(w);s.appendChild(m);d.appendChild(s);return d};
+ if(root.classList.contains('pt-enter')){const o=bars(root.getAttribute('data-pt')||'','out');document.body.appendChild(o);root.classList.add('pt-ready');setTimeout(()=>o.remove(),1000)}
  const label=a=>{const u=new URL(a.href,location.href).pathname;
   if(/\/work\//.test(u))return 'Work';
   if(/\/about\//.test(u))return 'About';
@@ -33,11 +35,11 @@ if(preview){
   e.preventDefault();
   const t=label(a);
   try{sessionStorage.setItem('pt',t)}catch(_){}
-  root.style.setProperty('--px',e.clientX+'px');root.style.setProperty('--py',e.clientY+'px');
-  root.classList.remove('pt-enter');root.setAttribute('data-pt',t);root.classList.add('pt-leave');
+  document.querySelectorAll('.pt-bars').forEach(x=>x.remove());
+  document.body.appendChild(bars(t,'in'));
   setTimeout(()=>{location.href=url.href},640);
  });
- addEventListener('pageshow',e=>{if(e.persisted){root.classList.remove('pt-leave','pt-enter')}});
+ addEventListener('pageshow',e=>{if(e.persisted){root.classList.remove('pt-leave','pt-enter');document.querySelectorAll('.pt-bars').forEach(x=>x.remove())}});
  root.addEventListener('animationend',()=>{},{passive:true});
 })();
 
