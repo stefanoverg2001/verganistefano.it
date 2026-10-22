@@ -33,7 +33,7 @@ if(preview){
   const url=new URL(a.href,location.href);
   if(url.origin!==location.origin||!/^https?:|^file:/.test(url.protocol))return;
   if(url.pathname===location.pathname&&url.hash)return;
-  if(reduced.matches)return;
+  if(reduced.matches||'onpagereveal' in window)return;
   e.preventDefault();
   const t=label(a);
   try{sessionStorage.setItem('pt',t)}catch(_){}
