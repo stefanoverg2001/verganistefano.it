@@ -472,3 +472,5 @@ html.intro.intro-play header,html.intro.intro-play .landing-bottom{opacity:1;tra
 /* Casi studio: se "Team" è l'ultimo dato, usa tutto lo spazio rimasto e non va a capo (Arcana) */
 .metadata>span:nth-child(3):last-child{grid-column:3/-1}
 @media(max-width:768px){.metadata>span:nth-child(3):last-child{grid-column:1/-1;padding-right:0}}
+/* Coppie che su smartphone vanno una sotto l'altra (Booko) */
+@media(max-width:768px){.cs-stack-m{grid-template-columns:1fr}}
