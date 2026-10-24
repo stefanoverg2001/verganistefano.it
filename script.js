@@ -58,12 +58,12 @@ if(preview){
   t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];select(n);n.focus()}})});
 })();
 
-/* Video dei casi studio: si caricano e partono solo quando arrivano vicino allo schermo.
+/* Video dei casi studio (da telefono la versione più leggera in m/, se c'è): si caricano e partono solo quando arrivano vicino allo schermo.
    Su iPhone (es. con Risparmio energetico) l'avvio automatico può essere bloccato:
    in quel caso partono al primo tocco sullo schermo o toccando il video. */
 (function(){var v=document.querySelectorAll("video[data-src]");if(!v.length)return;var blocked=[];
  function prep(el){el.muted=true;el.defaultMuted=true;el.playsInline=true;el.setAttribute("playsinline","");el.setAttribute("webkit-playsinline","");el.setAttribute("muted","")}
- function go(el){prep(el);if(!el.getAttribute("src")){el.src=el.dataset.src;el.preload="auto";el.load()}var p=el.play();if(p&&p.catch)p.catch(function(){if(blocked.indexOf(el)<0)blocked.push(el)})}
+ function go(el){prep(el);if(!el.getAttribute("src")){el.src=(el.dataset.srcM&&matchMedia("(max-width:768px)").matches)?el.dataset.srcM:el.dataset.src;el.preload="auto";el.load()}var p=el.play();if(p&&p.catch)p.catch(function(){if(blocked.indexOf(el)<0)blocked.push(el)})}
  function unlock(){blocked.splice(0).forEach(function(el){var r=el.getBoundingClientRect();if(r.bottom>-300&&r.top<innerHeight+300){var p=el.play();if(p&&p.catch)p.catch(function(){})}})}
  ["touchend","click","scroll"].forEach(function(t){addEventListener(t,unlock,{passive:true})});
  v.forEach(function(el){prep(el);el.addEventListener("click",function(){if(el.paused){var p=el.play();if(p&&p.catch)p.catch(function(){})}})});
