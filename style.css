@@ -474,3 +474,6 @@ html.intro.intro-play header,html.intro.intro-play .landing-bottom{opacity:1;tra
 @media(max-width:768px){.metadata>span:nth-child(3):last-child{grid-column:1/-1;padding-right:0}}
 /* Coppie che su smartphone vanno una sotto l'altra (Booko) */
 @media(max-width:768px){.cs-stack-m{grid-template-columns:1fr}}
+/* About: "Qui trovi le prove" più grande (24/10) */
+.about-grid .text-link{font-size:clamp(18px,1.45vw,21px);letter-spacing:-.01em}
+@media(max-width:768px){.about-grid .text-link{font-size:18px}}
