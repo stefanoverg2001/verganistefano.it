@@ -486,3 +486,6 @@ body:has(.notfound) header,body:has(.notfound) footer{flex:none}
 /* About: "Qui trovi le prove" sempre sottolineato (25/10) */
 .about-grid .text-link{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:.3em}
 .about-grid .text-link:hover{text-decoration-thickness:2.5px}
+/* About: "Non sparire adesso." sempre sottolineato (25/10) */
+.contact .contact-big{text-decoration:underline;text-decoration-thickness:max(2px,.035em);text-underline-offset:.1em}
+.contact .contact-big:hover{text-decoration-thickness:max(3px,.05em)}
