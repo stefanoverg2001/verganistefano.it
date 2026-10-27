@@ -4,8 +4,8 @@ if(preview){
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const image=preview.querySelector('img');let x=0,y=0,tx=0,ty=0,raf=0,active=false;
  const hide=ev=>{if(window.__dbg)window.__dbg('hide '+(ev&&ev.type));active=false;preview.classList.remove('visible');cancelAnimationFrame(raf);raf=0};
- function draw(){x+=(tx-x)*(reduced.matches?1:.22);y+=(ty-y)*(reduced.matches?1:.22);if(isFinite(x)&&isFinite(y)){preview.style.left=Math.round(x)+'px';preview.style.top=Math.round(y)+'px'}if(active)raf=requestAnimationFrame(draw)}
- function position(e){if(!e||!isFinite(e.clientX)||!isFinite(e.clientY))return;const pw=preview.offsetWidth||360,ph=preview.offsetHeight||270;tx=Math.max(12,Math.min(e.clientX+28,innerWidth-pw-12));ty=Math.max(12,Math.min(e.clientY+24,innerHeight-ph-12))}
+ const draw=function(){x+=(tx-x)*(reduced.matches?1:.22);y+=(ty-y)*(reduced.matches?1:.22);if(isFinite(x)&&isFinite(y)){preview.style.left=Math.round(x)+'px';preview.style.top=Math.round(y)+'px'}if(active)raf=requestAnimationFrame(draw)}
+ const position=function(e){if(!e||!isFinite(e.clientX)||!isFinite(e.clientY))return;const pw=preview.offsetWidth||360,ph=preview.offsetHeight||270;tx=Math.max(12,Math.min(e.clientX+28,innerWidth-pw-12));ty=Math.max(12,Math.min(e.clientY+24,innerHeight-ph-12))}
  document.querySelectorAll('.project-row[data-cover]').forEach(row=>{
  const enter=e=>{if(window.__dbg)window.__dbg('enter '+e.type+' '+e.clientX+','+e.clientY+' fine:'+fine.matches+' attivo:'+active);if(!fine.matches||e.pointerType==='touch'||active)return;var ar=parseFloat(row.dataset.ar)||4/3;preview.style.width=Math.round(Math.min(440,Math.sqrt(97200*ar)))+'px';image.src=row.dataset.cover;position(e);x=tx;y=ty;active=true;preview.classList.add('visible');cancelAnimationFrame(raf);draw();if(window.__dbg)window.__dbg('dopo enter tx:'+tx+' left:'+preview.style.left)};
  row.addEventListener('pointerenter',enter);row.addEventListener('mouseenter',enter);row.addEventListener('pointermove',position);row.addEventListener('mousemove',position);row.addEventListener('pointerleave',hide);row.addEventListener('mouseleave',hide);row.addEventListener('click',hide);
