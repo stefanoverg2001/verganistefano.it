@@ -72,3 +72,23 @@ if(preview){
 
 /* Copertine Work: le scarico in anticipo appena la pagina è pronta, così al passaggio del mouse compaiono subito */
 (function(){var r=document.querySelectorAll('.project-row[data-cover]');if(!r.length)return;function go(){r.forEach(function(e){var i=new Image();i.decoding='async';i.src=e.dataset.cover})}if(document.readyState==='complete')setTimeout(go,200);else addEventListener('load',function(){setTimeout(go,200)})})();
+
+/* Home: la scritta non deve mai finire sopra il testo in basso (Safari/iPad) — misura lo spazio reale */
+(function(){
+  const stage=document.querySelector('.landing-stage');if(!stage)return;
+  const bottom=document.querySelector('.landing-bottom');const head=document.querySelector('body>header');
+  let t;
+  function fit(){
+    stage.style.removeProperty('--wm');
+    if(window.innerWidth<=768||!bottom)return;
+    const css=stage.getBoundingClientRect().width;
+    const hh=head&&getComputedStyle(head).position!=='fixed'?head.offsetHeight:0;
+    const headPad=head&&getComputedStyle(head).position==='fixed'?head.offsetHeight:0;
+    const avail=window.innerHeight-hh-headPad-bottom.offsetHeight-48;
+    const fitW=Math.floor(avail/0.68);
+    if(fitW>0&&fitW<css)stage.style.setProperty('--wm',Math.max(fitW,260)+'px');
+    for(let i=0;i<4;i++){const over=stage.getBoundingClientRect().bottom-(bottom.getBoundingClientRect().top-12);if(over<=0)break;const cur=stage.getBoundingClientRect().width;stage.style.setProperty('--wm',Math.max(cur-over/0.545-4,260)+'px')}
+  }
+  fit();addEventListener('load',fit);addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(fit,80)});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+})();
