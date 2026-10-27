@@ -489,3 +489,25 @@ body:has(.notfound) header,body:has(.notfound) footer{flex:none}
 /* About: "Non sparire adesso." sempre sottolineato (25/10) */
 .contact .contact-big{text-decoration:underline;text-decoration-thickness:max(2px,.035em);text-underline-offset:.1em}
 .contact .contact-big:hover{text-decoration-thickness:max(3px,.05em)}
+/* Responsive fascia intermedia: tablet e finestre piccole (27/10) */
+/* 1. Work: colonne più equilibrate, mai attaccate; sotto i 1100 px niente colonna Settore */
+@media(min-width:769px){.table-head,.project-row{grid-template-columns:28fr 20fr 31fr 9fr 12fr;column-gap:16px}}
+@media(min-width:769px) and (max-width:1100px){
+ .table-head,.project-row{grid-template-columns:38fr 42fr 10fr 10fr}
+ .table-head>span:nth-child(2),.project-row .sector{display:none}
+}
+/* 2. About su tablet: nome sopra, collage sotto a tutta larghezza (nuvoletta leggibile) */
+@media(min-width:769px) and (max-width:1024px){
+ .about-top{grid-template-columns:1fr;gap:8px}
+ .ab-collage{justify-self:center;width:100%;max-width:780px;margin-top:0;margin-bottom:-4%}
+}
+/* 3. Home su tablet in verticale: scritta e personaggio più grandi */
+@media(min-width:769px) and (max-width:1024px) and (orientation:portrait){.landing-stage{--wm:min(calc(100vw - 64px),80svh)}}
+/* 4. Casi studio su tablet: metadati su due colonne, Disciplina a tutta riga */
+@media(min-width:769px) and (max-width:1024px){
+ .metadata{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;row-gap:20px}
+ .metadata>span:first-child{grid-column:1/-1}
+ .metadata>span:nth-child(3):last-child{grid-column:auto}
+}
+/* 6. Testo dei casi studio: righe non troppo lunghe su tablet */
+@media(min-width:769px) and (max-width:1279px){.case-text{max-width:66ch}}
