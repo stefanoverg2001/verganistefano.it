@@ -4,13 +4,13 @@ if(preview){
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const image=preview.querySelector('img');let x=0,y=0,tx=0,ty=0,raf=0,active=false;
  const hide=()=>{active=false;preview.classList.remove('visible');cancelAnimationFrame(raf);raf=0};
- function draw(){x+=(tx-x)*(reduced.matches?1:.22);y+=(ty-y)*(reduced.matches?1:.22);preview.style.transform=`translate3d(${x}px,${y}px,0)`;if(active)raf=requestAnimationFrame(draw)}
- function position(e){const pw=preview.offsetWidth||360,ph=preview.offsetHeight||270;tx=Math.max(12,Math.min(e.clientX+28,innerWidth-pw-12));ty=Math.max(12,Math.min(e.clientY+24,innerHeight-ph-12))}
+ function draw(){x+=(tx-x)*(reduced.matches?1:.22);y+=(ty-y)*(reduced.matches?1:.22);if(isFinite(x)&&isFinite(y)){preview.style.left=Math.round(x)+'px';preview.style.top=Math.round(y)+'px'}if(active)raf=requestAnimationFrame(draw)}
+ function position(e){if(!e||!isFinite(e.clientX)||!isFinite(e.clientY))return;const pw=preview.offsetWidth||360,ph=preview.offsetHeight||270;tx=Math.max(12,Math.min(e.clientX+28,innerWidth-pw-12));ty=Math.max(12,Math.min(e.clientY+24,innerHeight-ph-12))}
  document.querySelectorAll('.project-row[data-cover]').forEach(row=>{
- row.addEventListener('pointerenter',e=>{if(!fine.matches||e.pointerType==='touch')return;var ar=parseFloat(row.dataset.ar)||4/3;preview.style.width=Math.round(Math.min(440,Math.sqrt(97200*ar)))+'px';image.src=row.dataset.cover;position(e);x=tx;y=ty;active=true;preview.classList.add('visible');cancelAnimationFrame(raf);draw()});
- row.addEventListener('pointermove',position);row.addEventListener('pointerleave',hide);row.addEventListener('click',hide);
+ const enter=e=>{if(!fine.matches||e.pointerType==='touch'||active)return;var ar=parseFloat(row.dataset.ar)||4/3;preview.style.width=Math.round(Math.min(440,Math.sqrt(97200*ar)))+'px';image.src=row.dataset.cover;position(e);x=tx;y=ty;active=true;preview.classList.add('visible');cancelAnimationFrame(raf);draw()};
+ row.addEventListener('pointerenter',enter);row.addEventListener('mouseenter',enter);row.addEventListener('pointermove',position);row.addEventListener('mousemove',position);row.addEventListener('pointerleave',hide);row.addEventListener('mouseleave',hide);row.addEventListener('click',hide);
  });
- addEventListener('scroll',hide,{passive:true});addEventListener('resize',hide);addEventListener('blur',hide);fine.addEventListener('change',hide);
+ addEventListener('scroll',hide,{passive:true});addEventListener('resize',hide);addEventListener('blur',hide);if(fine.addEventListener)fine.addEventListener('change',hide);else if(fine.addListener)fine.addListener(hide);
 }
 
 // Page transitions between internal pages.

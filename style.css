@@ -511,3 +511,10 @@ body:has(.notfound) header,body:has(.notfound) footer{flex:none}
 }
 /* 6. Testo dei casi studio: righe non troppo lunghe su tablet */
 @media(min-width:769px) and (max-width:1279px){.case-text{max-width:66ch}}
+/* Home desktop: la scritta si adatta anche all'altezza della finestra (mai sopra il testo in basso) — 27/10 */
+@media(min-width:769px){.landing-stage{--wm:min(55vw,80vh,calc((100vh - 340px)*1.45))}}
+@supports(height:1svh){@media(min-width:769px){.landing-stage{--wm:min(55vw,80svh,calc((100svh - 340px)*1.45))}}}
+@media(min-width:769px) and (max-width:1024px) and (orientation:portrait){.landing-stage{--wm:min(calc(100vw - 64px),80svh)}}
+.landing-bottom{position:relative;z-index:2}
+/* Altezza esplicita della scritta in Home (Safari non sempre rispetta aspect-ratio dentro la griglia) */
+.landing-stage{height:calc(var(--wm)*0.545); align-self:center; justify-self:center}
