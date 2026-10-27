@@ -518,3 +518,8 @@ body:has(.notfound) header,body:has(.notfound) footer{flex:none}
 .landing-bottom{position:relative;z-index:2}
 /* Altezza esplicita della scritta in Home (Safari non sempre rispetta aspect-ratio dentro la griglia) */
 .landing-stage{height:calc(var(--wm)*0.545); align-self:center; justify-self:center}
+/* Home: centratura con flex invece della griglia (Safari/iPad metteva la scritta in basso) — 27/10 */
+.landing-page{min-height:100vh}
+@supports(height:1svh){.landing-page{min-height:100svh}}
+.landing{display:flex!important;flex-direction:column;align-items:center;justify-content:center;flex:1 0 auto}
+.landing-stage{flex:none;margin-left:auto;margin-right:auto;max-width:100%}

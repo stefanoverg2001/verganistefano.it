@@ -92,3 +92,6 @@ if(preview){
   fit();addEventListener('load',fit);addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(fit,80)});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 })();
+
+/* Diagnosi Home: aggiungi #debug all'indirizzo per vedere le misure */
+if(location.hash==='#debug'&&document.querySelector('.landing-stage')){addEventListener('load',()=>setTimeout(()=>{const q=s=>{const e=document.querySelector(s);if(!e)return'-';const r=e.getBoundingClientRect();return Math.round(r.top)+'→'+Math.round(r.bottom)+' h'+Math.round(r.height)+' w'+Math.round(r.width)};const d=document.createElement('pre');d.style.cssText='position:fixed;left:8px;bottom:8px;z-index:99999;background:#000;color:#0f0;font:11px/1.4 monospace;padding:8px;margin:0;white-space:pre-wrap;max-width:95vw';d.textContent=['vp '+innerWidth+'×'+innerHeight+' dpr'+devicePixelRatio,'svh '+(CSS.supports('height','1svh')?'si':'no'),'body '+q('body'),'header '+q('body>header'),'main '+q('.landing'),'stage '+q('.landing-stage'),'scritta '+q('.landing-wordmark'),'basso '+q('.landing-bottom'),'--wm inline '+(document.querySelector('.landing-stage').style.getPropertyValue('--wm')||'no'),navigator.userAgent].join('\n');document.body.appendChild(d)},2500))}
